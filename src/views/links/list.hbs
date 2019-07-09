@@ -1,0 +1,31 @@
+<div class="container p-4">
+    <div class="row">
+        {{#each compes}}
+           <div class="col-md-3">
+               <div class="card text-center">
+                   <div class="card-body">
+                       
+                           <h3 class="card-title">
+                               {{nombre_competencia}}
+                           </h3>
+                       <p class="m-2">
+                           Nombre organizador: {{nombre_organizador}} 
+                          <p> Nombre del gimnasio: {{nombre_gym}}</p>
+
+                         <p>  Dirección del gimnasio: {{direccion_gym}}       </p>
+                       </p>
+                       <a href="/links/delete/{{id_competencia}}" class="btn btn-danger">Delete</a>
+                       <a href="/links/edit/{{id_competencia}}" class="btn btn-success">Edit</a>
+                   </div>
+               </div>
+           </div> 
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    No hay competencias aún
+                    <a href="/links/add">Avientate una</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
