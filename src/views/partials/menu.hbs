@@ -12,20 +12,19 @@
           Mostrar
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/links/">Desplegar</a>
-          <a class="dropdown-item" href="/links/add">Añadir</a>
+          <a class="dropdown-item" href="/profile">Usuarios a cargo</a>
+          <a class="dropdown-item" href="/links/add">Añadir competencia</a>
           <a href="/links/adduser" class="dropdown-item">Añadir competidores</a>
-          <a href="/profile" class="dropdown-item">Profile</a>
+          <a href="/links/grafos" class="dropdown-item">Ver estadisticas</a>          
+          <a href="/signup" class="dropdown-item">Añadir administrador</a>
           <a href="/logout" class="dropdown-item">Logout</a>
-          
+
         </div>
         {{else}}
         <li class="nav-item">
           <a href="/signin" class="nav-link">Sign In</a>
         </li>
-        <li class="nav-item">
-          <a href="/signup"  class="nav-link">Sign Up</a>
-        </li>
+       
         {{/if}}
           
       </li>

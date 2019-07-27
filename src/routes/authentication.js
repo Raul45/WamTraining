@@ -6,7 +6,7 @@ const pool = require('../database');
 const {isLoggedIn, isNotLoggedIn} = require('../lib/auth');
 
 
-router.get('/signup', isNotLoggedIn, (req, res )=>{
+router.get('/signup', isLoggedIn, (req, res )=>{
     res.render('auth/singup');
 });
 
@@ -42,7 +42,7 @@ router.get('/resultados', async (req, res) =>{
         compes
      });
 });
-router.get('/winners/:categoria', async (req,res)=>{
+router.get('/winners/:categoria', isLoggedIn, async (req,res)=>{
     const { categoria } = req.params;
     console.log(categoria);
     const results = await pool.query('SELECT * FROM resultados WHERE competencia = ? ORDER BY final DESC',[categoria]);
@@ -51,10 +51,10 @@ router.get('/winners/:categoria', async (req,res)=>{
         results
     });
 });
-router.get('/operacion/:nombre', async (req, res) =>{
+router.get('/operacion/:nombre', isLoggedIn, async (req, res) =>{
     const { nombre } = req.params;
     //console.log(nombre);
-    const names = await pool.query('SELECT nombre from competidores WHERE categoria = ?',[nombre]);
+    const names = await pool.query('SELECT gamertag from competidores WHERE categoria = ?',[nombre]);
     const results = await pool.query('SELECT * FROM resultados WHERE competencia = ? ORDER BY final DESC',[nombre]);
     console.log(results);
     //console.log(names);

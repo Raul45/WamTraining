@@ -20,11 +20,15 @@ router.post('/add', async (req,res) => {
        direccion_gym,
        user_id: req.user.id
    };
-   console.log(newCompetition);
+   //console.log(newCompetition);
+   try{
    await pool.query('INSERT INTO competencias set ?', [newCompetition]);
    req.flash('success','Agregado con exito');
    res.redirect('/links/');
-
+   }catch(e){
+       req.flash('success','El nombre de la competencia no se puede repetir');
+       res.redirect('/links/');
+   }
 });
 
 router.get('/', async (req, res) => {
@@ -84,7 +88,8 @@ router.get('/adduser', async (req, res) =>{
 router.post('/adduser', async (req, res) =>{
     //console.log(req.body);
     const { nombre, 
-        apellido, 
+        apellido,
+        gamertag, 
         categoria, 
         celular, 
         edad,
@@ -93,11 +98,18 @@ router.post('/adduser', async (req, res) =>{
         estatura    
     } = req.body;
     const newCompetidor = {
-        nombre, apellido, categoria, celular,correo, edad, sexo, estatura,id_admin: req.user.id
+        nombre, apellido, gamertag, categoria, celular,correo, edad, sexo, estatura,id_admin: req.user.id
     }
+    try{
     await pool.query('INSERT into competidores set ?',[newCompetidor]);
     req.flash('success','Agregado con exito');
     res.redirect('/profile/');
+    } catch(err) {
+        console.log(err);
+        req.flash('success','Alias tiene que ser único');
+        res.redirect('/profile/');
+    }
+
 });
 
 router.get('/deleteu/:id', async (req, res) =>{
@@ -169,9 +181,14 @@ router.post('/result', async (req, res )=>{
         wodUno,puntosUno,wodDos,puntosDos,wodTres,puntosTres,
         final
      }
-
+     try{
      await pool.query('INSERT INTO resultados SET ?', [newResult]);
-     res.redirect('/resultados');
+     req.flash('success','Agregado con éxito');
+     res.redirect('/operacion/' + competencia);
+     }catch(e){
+         req.flash('success','Competidor ya cuenta con puntaje');
+         res.redirect('/operacion/' + competencia);
+     }
     });
 
 //////////////// RUTAS DE GRAFICAS //////////////////////
