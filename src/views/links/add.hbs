@@ -6,19 +6,21 @@
                 <form action="/links/add" method="POST">
                 <div class="form-group">
                     <input type="text" class="form-control" name="nombre_competencia" placeholder="Nombre de la competencia" autofocus>
-                </div>
+                </div>       {{#each acmons}}
                      <div class="form-group">
-                    <input type="text" class="form-control" name="nombre_organizador" placeholder="Nombre del organizador" >
-                </div>
+                        <label for="exampleFormControlSelect1">Organizador</label>
+                        <select class="form-control" name="nombre_organizador" id="exampleFormControlSelect1">
+                            <option value="{{nombre}}">{{nombre}}</option>
+                        </select>
+
+                    </div>   {{/each}}
                  <div class="form-group">
                     <input type="text" class="form-control" name="nombre_gym" placeholder="Nombre del gimnasio">
                 </div>
                  <div class="form-group">
                     <input type="text" class="form-control" name="direccion_gym" placeholder="Dirección del gimnasio ">
                 </div>
-                 <div class="form-group">
-                    <input type="text" class="form-control" name="rol" value="Admin" disabled>
-                </div>
+                 
                 <div class="form-group">
                 <button class="btn btn-success btn-block">Save</button>
                 </div>

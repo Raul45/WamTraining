@@ -1,0 +1,63 @@
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+ 
+
+
+       
+<div class="container p-4">
+
+<div class="col-md-6">
+<div class="card text-center">
+ 
+    <h3 class="card-title">
+        <p>Competidores</p>
+     </h3>
+
+     <div class="card-body">
+         <span aria-hidden="true">
+                
+                    
+                        </span>
+
+
+                      
+    <div class="card card-body text-center">
+    <div id="piechart_3d" style="width: 450px; height: 250px;"></div>
+
+
+    </div>
+</div>
+</div>
+</div>
+</div>{{#if m}}
+   <a href="" id="demo" target="{{m.mm}}" ></div>
+    {{/if}}
+{{#if f}}
+   <a href="" id="demo2" target="{{f.ff}}" ></div>
+    {{/if}}
+       <script type="text/javascript">
+      var cookieValue = document.getElementById('demo');
+      var x = parseInt(cookieValue.getAttribute('target'));
+      var a2 = document.getElementById('demo2');
+      var xx = parseInt(a2.getAttribute('target'));
+      //var cookieValue2 = cookieValue.getAttribute("value");
+    alert(x);
+    
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Masculinos',     x],
+          ['Femeninos',      xx]
+         
+        ]);
+
+        var options = {
+          title: 'Competidores por sexo',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>

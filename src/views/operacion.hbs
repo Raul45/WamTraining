@@ -1,0 +1,93 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Añadir resultados
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Añadir resultado</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/links/result" method="POST">
+                  
+                     <div class="form-group">
+                        <select class="form-control" name="competencia" id="exampleFormControlSelect1">
+                            <option value="{{nombre}}">{{nombre}}</option>
+                        </select>
+                    </div>  
+                 <div class="form-group">
+                    <label for="ss">Competidor</label>
+                    <select class="form-control" name="competidor" id="ss">
+                        {{#each names}}
+                        <option value="{{nombre}}">{{nombre}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                 <div class="form-group">
+                    <input type="number" class="form-control" name="hashUno" placeholder="Hash Uno">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="pUno" placeholder="Puntos">
+                </div>
+                  <div class="form-group">
+                    <input type="number" class="form-control" name="hashDos" placeholder="Hash Dos">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="pDos" placeholder="Puntos">
+                </div>
+                  <div class="form-group">
+                    <input type="number" class="form-control" name="hashTres" placeholder="Hash Tres">
+                </div>
+                <div class="form-group">
+                    <input type="number" class="form-control" name="pTres" placeholder="Puntos">
+                </div>
+                    <div class="form-group">
+                <button class="btn btn-success btn-block">Save</button>
+                </div>
+                </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container p-4">
+       <p><h1>Resultados: {{nombre}}</h1></p>
+
+      
+        <table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Competidor</th>
+      <th scope="col">Primera ronda</th>
+      <th scope="col">Segunda ronda</th>
+      <th scope="col">Tercera ronda</th>
+      <th scope="col">Final</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+     {{#each results}}
+    <tr>
+      <th scope="row">{{competidor}}</th>
+      <td>{{puntosUno}}</td>
+      <td>{{puntosDos}}</td>
+      <td>{{puntosTres}}</td>
+      <td>{{final}}</td>
+      
+    </tr>
+    <tr>
+      {{/each}}
+  </tbody>
+</table>
+ 
+</div>

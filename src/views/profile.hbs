@@ -10,4 +10,39 @@
             </div>
         </div>
     </div>
+
+
+    <div class="row">
+        {{#each compes}}
+           <div class="col-md-3">
+               <div class="card text-center">
+                   <div class="card-body">
+                       
+                           <h3 class="card-title">
+                               {{nombre}} {{apellido}}
+                           </h3>
+                       <p class="m-2">
+                           Competencia: {{categoria}} 
+                          <p> Celular: {{celular}}</p>
+
+                         <p>Edad: {{edad}}       </p>
+                        <p>Correo:{{correo}}</p>
+                        <p>Sexo: {{sexo}}</p>
+                       <p>Estatura: {{estatura}}</p>
+                       </p>
+                       <a href="/links/deleteu/{{id_competidor}}" class="btn btn-danger">Delete</a>
+                       <a href="/links/editu/{{id_competidor}}" class="btn btn-success">Edit</a>
+                   </div>
+               </div>
+           </div> 
+        {{else}}
+            <div class="col-md-4 mx-auto">
+                <div class="card card-body text-center">
+                    Usuarios no encontrados
+                    <a href="/links/adduser">Registra algunos</a>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+
 </div>
