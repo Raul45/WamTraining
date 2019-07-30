@@ -70,11 +70,14 @@ router.post('/edit/:id', async (req, res) =>{
         direccion_gym,
         rol
     }
-
+    try{
     await pool.query('UPDATE competencias SET ? WHERE id_competencia = ? ', [newCompetition, id]);
     req.flash('success','Actualizado con exito');
     res.redirect('/links/');
-
+    }catch(err){
+        console.log(err);
+        res.redirect('/links/');
+    }
 });
 
 ///////////////// RUTAS DE USUARIOS //////////////////
@@ -146,9 +149,15 @@ router.post('/editu/:id', async (req, res) =>{
             nombre, apellido, categoria, celular,correo, edad, sexo, estatura,id_admin: req.user.id
         }
 
+    
+    try{
     await pool.query('UPDATE competidores SET ? WHERE id_competidor = ? ', [newCompetidor, id]);
     req.flash('success','Actualizado con exito');
     res.redirect('/profile/');
+    }catch(err){
+        res.redirect('/profile');
+        req.flash('success','Algo salió mal porfavor intentelo de nuevo');
+    }
 
 });
 

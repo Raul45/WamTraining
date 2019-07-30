@@ -35,14 +35,14 @@ router.get('/profile', isLoggedIn, async (req, res) =>{
     {compes});
 });
 
-router.get('/resultados', async (req, res) =>{
+router.get('/resultados',  async (req, res) =>{
     const compes = await pool.query('SELECT * FROM competencias');
     console.log(compes);
     res.render('resultados',{ 
         compes
      });
 });
-router.get('/winners/:categoria', isLoggedIn, async (req,res)=>{
+router.get('/winners/:categoria', async (req,res)=>{
     const { categoria } = req.params;
     console.log(categoria);
     const results = await pool.query('SELECT * FROM resultados WHERE competencia = ? ORDER BY final DESC',[categoria]);
