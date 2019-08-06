@@ -93,7 +93,8 @@ router.post('/adduser', async (req, res) =>{
     const { nombre, 
         apellido,
         gamertag, 
-        categoria, 
+        categoria,
+        procedencia, 
         celular, 
         edad,
         correo, 
@@ -101,7 +102,7 @@ router.post('/adduser', async (req, res) =>{
         estatura    
     } = req.body;
     const newCompetidor = {
-        nombre, apellido, gamertag, categoria, celular,correo, edad, sexo, estatura,id_admin: req.user.id
+        nombre, apellido, gamertag, categoria, procedencia,celular,correo, edad, sexo, estatura,id_admin: req.user.id
     }
     try{
     await pool.query('INSERT into competidores set ?',[newCompetidor]);
@@ -139,14 +140,15 @@ router.post('/editu/:id', async (req, res) =>{
     const { id } = req.params;
     const { nombre, 
         apellido, 
-        categoria, 
+        categoria,
+        procedencia, 
         celular, 
         edad,
         correo, 
         sexo, 
         estatura } =req.body;
         const newCompetidor = {
-            nombre, apellido, categoria, celular,correo, edad, sexo, estatura,id_admin: req.user.id
+            nombre, apellido, categoria,procedencia, celular,correo, edad, sexo, estatura,id_admin: req.user.id
         }
 
     
@@ -204,10 +206,21 @@ router.post('/result', async (req, res )=>{
     router.get('/grafos', async (req, res )=>{
         const m = await pool.query('SELECT COUNT(nombre) AS mm FROM `competidores` WHERE sexo = "M"');
         const f = await pool.query('SELECT COUNT(nombre) AS ff FROM `competidores` WHERE sexo = "F"');
+        //const d = await pool.query('SELECT COUNT(procedencia) AS dd FROM `competidores` WHERE procedencia = "Durango"');
+        //const n = await pool.query('SELECT COUNT(procedencia) AS nn FROM `competidores` WHERE procedencia = "NuevoLeon"');
+        //const c = await pool.query('SELECT COUNT(procedencia) AS cc FROM `competidores` WHERE procedencia = "Coahuila"');
+        //const t = await pool.query('SELECT COUNT(procedencia) AS tt FROM `competidores` WHERE procedencia = "Tamaulipas"');
+        //const s = await pool.query('SELECT COUNT(procedencia) AS ss FROM `competidores` WHERE procedencia = "Sonora"');
+
         console.log(m,f);
         res.render('links/grafos',{
             m:m[0],     
             f:f[0]
+            //d:d[0],
+            //n:n[0],
+            //c:c[0],
+            //t:t[0],
+            //s:s[0]
         });
 
     });
